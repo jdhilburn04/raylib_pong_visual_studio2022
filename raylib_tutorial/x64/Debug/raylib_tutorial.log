@@ -1,10 +1,11 @@
 ﻿  main.cpp
-C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(31,89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(32,89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(72,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(72,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(76,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(76,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(44,89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(45,89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(85,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(85,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(89,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(89,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(108,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   raylib_tutorial.vcxproj -> C:\dev\game_projects\raylib_tutorial\x64\Debug\raylib_tutorial.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.
