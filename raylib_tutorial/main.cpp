@@ -9,6 +9,14 @@ int main() {
     int screen_height = 600;
     InitWindow(screen_width, screen_height, "PONG");
 
+    // Paddle positions
+    int paddle1PosX = screen_width - 50;
+    int paddle1PosY = screen_height / 2;
+    int paddle2PosX = 50;
+    int paddle2PosY = screen_height / 2;
+    int botPaddlePosX = 50;
+    int botPaddlePosY = screen_height / 2;
+
     // Game state variable
     GameScreen currentScreen = TITLE;
 
@@ -68,10 +76,22 @@ int main() {
             DrawText(two_player_button_text, twoPlayerButton.x + 10, twoPlayerButton.y + 10, buttonFontSize, WHITE);
         }
         else if (currentScreen == ONE_PLAYER) {
-            DrawText("ONE PLAYER MODE", 250, 280, 30, GREEN);
+            DrawRectangle(paddle1PosX, paddle1PosY, 10, 50, WHITE);
+            DrawRectangle(botPaddlePosX, botPaddlePosY, 10, 50, WHITE);
+            DrawRectangle(screen_width / 2, 0, 10, screen_height, WHITE);
+
+            if (IsKeyDown(KEY_UP)) paddle1PosY -= 5;
+            if (IsKeyDown(KEY_DOWN)) paddle1PosY += 5;
         }
         else if (currentScreen == TWO_PLAYER) {
-            DrawText("TWO PLAYER MODE", 250, 280, 30, ORANGE);
+            DrawRectangle(paddle1PosX, paddle1PosY, 10, 50, WHITE);
+            DrawRectangle(paddle2PosX, paddle2PosY, 10, 50, WHITE);
+            DrawRectangle(screen_width / 2, 0, 10, screen_height, WHITE);
+
+            if (IsKeyDown(KEY_UP)) paddle1PosY -= 5;
+            if (IsKeyDown(KEY_DOWN)) paddle1PosY += 5;
+            if (IsKeyDown(KEY_W)) paddle2PosY -= 5;
+            if (IsKeyDown(KEY_S)) paddle2PosY += 5;
         }
 
         EndDrawing();
