@@ -1,4 +1,10 @@
 ﻿  main.cpp
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(20,89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(21,89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(64,83): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(64,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(65,87): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\game_projects\raylib_tutorial\raylib_tutorial\main.cpp(65,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   raylib_tutorial.vcxproj -> C:\dev\game_projects\raylib_tutorial\x64\Debug\raylib_tutorial.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.
