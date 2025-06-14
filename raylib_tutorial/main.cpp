@@ -20,8 +20,8 @@ int main() {
     int paddle2Height = 75;
     int botPaddlePosX = 50;
     int botPaddlePosY = screen_height / 2;
-    int botPaddleSizeX = 10;
-    int botPaddleSizeY = 50;
+    int botPaddleWidth = 10;
+    int botPaddleHeight = 50;
 
     // Ball positions
     int ballPosX = screen_width / 2;
@@ -123,11 +123,98 @@ int main() {
         // One Player Mode
         else if (currentScreen == ONE_PLAYER) {
             DrawRectangle(paddle1PosX, paddle1PosY, paddle1Width, paddle1Height, WHITE);
-            DrawRectangle(botPaddlePosX, botPaddlePosY, paddle2PosX, paddle2PosY, WHITE);
-            DrawRectangle(screen_width / 2, 0, 10, screen_height, WHITE);
+            DrawRectangle(botPaddlePosX, botPaddlePosY, botPaddleWidth, botPaddleHeight, WHITE);
+            // Draw divider
+            DrawRectangle((screen_width / 2) - 5, 0, 10, screen_height, WHITE);
+            // Draw ball
+            DrawCircle(static_cast<int>(ballPosX), static_cast<int>(ballPosY), static_cast<float>(ballRadius), WHITE);
+            // Draw scores
+            DrawText(TextFormat("%i", player1Score), 175, 50, 50, WHITE);
+            DrawText(TextFormat("%i", botScore), 600, 50, 50, WHITE);
 
             if (IsKeyDown(KEY_UP)) paddle1PosY -= 5;
             if (IsKeyDown(KEY_DOWN)) paddle1PosY += 5;
+
+            // bot paddle pos
+            if (ballPosY - ballRadius >= botPaddlePosY) {
+                botPaddlePosY -= 5;
+            }
+            if (ballPosY - ballRadius  < botPaddlePosY + botPaddleHeight) {
+                botPaddlePosY += 5;
+			}
+            // player1 ball collision
+            if (ballPosX + ballRadius >= paddle1PosX &&
+                ballPosX - ballRadius <= paddle1PosX + paddle1Width &&
+                ballPosY >= paddle1PosY &&
+                ballPosY <= paddle1PosY + paddle1Height)
+            {
+                ballSpeedX *= -1;
+                ballPosX = paddle1PosX - ballRadius;
+            }
+            // bot ball collision
+            if (ballPosX - ballRadius <= botPaddlePosX + botPaddleWidth &&
+                ballPosX - ballRadius >= botPaddlePosX &&
+                ballPosY >= botPaddlePosY &&
+                ballPosY <= botPaddlePosY + botPaddleHeight)
+            {
+                ballSpeedX *= -1;
+                ballPosX = botPaddlePosX + botPaddleWidth + ballRadius;
+            }
+
+            // player 1 scores
+            if (ballPosX <= ballRadius) {
+                player2Score += 1;
+                ballPosX = screen_width / 2;
+                ballPosY = screen_height / 2;
+                ballPaused = true;
+                pauseStartTime = GetTime();
+            }
+            // player 2 scores
+            if (ballPosX >= screen_width - ballRadius) {
+                player1Score += 1;
+                ballPosX = screen_width / 2;
+                ballPosY = screen_height / 2;
+                ballPaused = true;
+                pauseStartTime = GetTime();
+            }
+            if (!ballPaused) {
+                ballPosX += ballSpeedX;
+                ballPosY += ballSpeedY;
+            }
+            else if (GetTime() - pauseStartTime >= pauseDuration) {
+                ballPaused = false;
+                ballSpeedX = (GetRandomValue(0, 1) == 0) ? -abs(ballSpeedX) : abs(ballSpeedX);
+                ballSpeedY = (GetRandomValue(0, 1) == 0) ? -abs(ballSpeedY) : abs(ballSpeedY);
+            }
+
+            if ((ballPosY >= (screen_height - ballRadius)) || (ballPosY <= ballRadius)) ballSpeedY *= -1;
+
+            // paddle 1 floor and ceiling collision
+            if (paddle1Height + paddle1PosY >= screen_height) {
+                paddle1PosY -= 5;
+            }
+            if (paddle1PosY <= 0) {
+                paddle1PosY *= 0;
+            }
+
+            // bot floor and ceiling collision
+            if (botPaddleHeight + botPaddlePosY >= screen_height) {
+                botPaddlePosY -= 5;
+            }
+            if (botPaddlePosY <= 0) {
+                botPaddlePosY *= 0;
+            }
+
+            if (player1Score == 11) {
+                currentScreen = GAME_OVER;
+                winner = 1;
+            }
+            if (player2Score == 11) {
+                currentScreen = GAME_OVER;
+                winner = 2;
+            }
+			
+            
         }
         // Two Player Mode
         else if (currentScreen == TWO_PLAYER) {
@@ -148,7 +235,7 @@ int main() {
             if (IsKeyDown(KEY_W)) paddle2PosY -= 5;
             if (IsKeyDown(KEY_S)) paddle2PosY += 5;
 
-            // left paddle collision
+            // player1 ball collision
             if (ballPosX + ballRadius >= paddle1PosX &&
                 ballPosX - ballRadius <= paddle1PosX + paddle1Width &&
                 ballPosY >= paddle1PosY &&
@@ -157,7 +244,7 @@ int main() {
                 ballSpeedX *= -1;
                 ballPosX = paddle1PosX - ballRadius;
             }
-            // right paddle collision
+            // player2 ball collision
             if (ballPosX - ballRadius <= paddle2PosX + paddle2Width &&  
                 ballPosX - ballRadius >= paddle2PosX &&                 
                 ballPosY >= paddle2PosY &&
@@ -197,7 +284,6 @@ int main() {
 
             // paddle 1 floor and ceiling collision
             if (paddle1Height + paddle1PosY >= screen_height) {
-                //paddle1PosY -= (paddle1Height / 2) - 20;
                 paddle1PosY -= 5;
             }
             if (paddle1PosY <= 0) {
