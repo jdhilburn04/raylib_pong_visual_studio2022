@@ -197,7 +197,8 @@ int main() {
 
             // paddle 1 floor and ceiling collision
             if (paddle1Height + paddle1PosY >= screen_height) {
-                paddle1PosY -= (paddle1Height / 2) - 20;
+                //paddle1PosY -= (paddle1Height / 2) - 20;
+                paddle1PosY -= 5;
             }
             if (paddle1PosY <= 0) {
                 paddle1PosY *= 0;
@@ -205,7 +206,7 @@ int main() {
 
             // paddle 2 floor and ceiling collision
             if (paddle2Height + paddle2PosY >= screen_height) {
-                paddle2PosY -= (paddle2Height / 2) - 20;
+                paddle2PosY -= 5 ;
             }
             if (paddle2PosY <= 0) {
                 paddle2PosY *= 0;
