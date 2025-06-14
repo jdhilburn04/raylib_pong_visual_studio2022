@@ -135,13 +135,14 @@ int main() {
             if (IsKeyDown(KEY_UP)) paddle1PosY -= 5;
             if (IsKeyDown(KEY_DOWN)) paddle1PosY += 5;
 
-            // bot paddle pos
-            if (ballPosY - ballRadius >= botPaddlePosY) {
+            // bot paddle movement
+            int botPaddleCenter = botPaddlePosY + botPaddleHeight / 2;
+            if (ballPosY < botPaddleCenter) {
                 botPaddlePosY -= 5;
-            }
-            if (ballPosY - ballRadius  < botPaddlePosY + botPaddleHeight) {
+            } else if (ballPosY > botPaddleCenter) {
                 botPaddlePosY += 5;
-			}
+            }
+
             // player1 ball collision
             if (ballPosX + ballRadius >= paddle1PosX &&
                 ballPosX - ballRadius <= paddle1PosX + paddle1Width &&
@@ -163,15 +164,15 @@ int main() {
 
             // player 1 scores
             if (ballPosX <= ballRadius) {
-                player2Score += 1;
+                player1Score += 1;
                 ballPosX = screen_width / 2;
                 ballPosY = screen_height / 2;
                 ballPaused = true;
                 pauseStartTime = GetTime();
             }
-            // player 2 scores
+            // bot scores
             if (ballPosX >= screen_width - ballRadius) {
-                player1Score += 1;
+                botScore += 1;
                 ballPosX = screen_width / 2;
                 ballPosY = screen_height / 2;
                 ballPaused = true;
@@ -209,9 +210,9 @@ int main() {
                 currentScreen = GAME_OVER;
                 winner = 1;
             }
-            if (player2Score == 11) {
+            if (botScore == 11) {
                 currentScreen = GAME_OVER;
-                winner = 2;
+                winner = 3;
             }
 			
             
@@ -313,7 +314,15 @@ int main() {
             bool hoveringOne = CheckCollisionPointRec(mouse, playAgain);
             bool hoveringTwo = CheckCollisionPointRec(mouse, quitButton);
 
-            DrawText(winner == 1 ? "PLAYER 1 WINS" : "PLAYER 2 WINS", 200, 150, 56, WHITE);
+            if (winner == 1) {
+                DrawText("PLAYER 1 WINS", 200, 150, 56, WHITE);
+            }
+            if (winner == 2) {
+                DrawText("PLAYER 2 WINS", 200, 150, 56, WHITE);
+			}
+            if (winner == 3) {
+                DrawText("BOT WINS", 265, 150, 56, WHITE);
+            }
 
             DrawRectangleRec(playAgain, hoveringOne ? LIGHTGRAY : GRAY);
             DrawRectangleLinesEx(playAgain, 2, WHITE);
