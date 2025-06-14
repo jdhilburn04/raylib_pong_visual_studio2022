@@ -211,11 +211,11 @@ int main() {
                 paddle2PosY *= 0;
             }
 
-            if (player1Score == 1) {
+            if (player1Score == 11) {
                 currentScreen = GAME_OVER;
                 winner = 1;
             }
-            if (player2Score == 1) {
+            if (player2Score == 11) {
                 currentScreen = GAME_OVER;
                 winner = 2;
             }
